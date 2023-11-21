@@ -4,8 +4,8 @@ import (
 	"net/http"
 )
 
-func CreateOrganization(organization OrganizationDetailed) (err error) {
-	err = request(http.MethodPost, "organizations", organization, &organization)
+func CreateOrganization(organization OrganizationDetailed) (createdOrganization OrganizationDetailed, err error) {
+	err = request(http.MethodPost, "organizations", organization, &createdOrganization)
 	return
 }
 

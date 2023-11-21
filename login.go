@@ -35,7 +35,7 @@ func Login(options ...string) (err error) {
 	clientID := options[0]
 	clientSecret := options[1]
 
-	payload := fmt.Sprintf("grant_type=client_credentials&client_id=%s&client_secret=%s&scope=monitoring", clientID, clientSecret)
+	payload := fmt.Sprintf("grant_type=client_credentials&client_id=%s&client_secret=%s", clientID, clientSecret)
 
 	req, err := http.NewRequest(http.MethodPost, authUrl, strings.NewReader(payload))
 	if err != nil {

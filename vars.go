@@ -61,6 +61,7 @@ func request(method, path string, payload interface{}, response interface{}) (er
 	if status := res.StatusCode; status != http.StatusOK {
 		body, _ := io.ReadAll(res.Body)
 		err = fmt.Errorf("error bad status code '%d' : %s", status, body)
+		return
 	}
 
 	if response != nil {
