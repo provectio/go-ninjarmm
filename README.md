@@ -85,7 +85,7 @@ newOrg := ninjarmm.OrganizationDetailed{
   }
 }
 
-org, err := ninjarmm.CreateOrganization(newOrg)
+org, err := ninjarmm.CreateOrganization(newOrg, 0)
 if err != nil {
   panic(err)
 }
