@@ -20,13 +20,13 @@ func ListOrganizationsDetailed() (organizations []OrganizationDetailed, err erro
 }
 
 type Organization struct {
-	ID               int            `json:"id,omitempty"`
-	Name             string         `json:"name"`
-	Description      string         `json:"description"`
-	UserData         any            `json:"userData"`
-	NodeApprovalMode ApprovalMode   `json:"nodeApprovalMode"`
-	Tags             []string       `json:"tags"`
-	Fields           map[string]any `json:"fields"`
+	ID               int          `json:"id,omitempty"`
+	Name             string       `json:"name"`
+	Description      string       `json:"description"`
+	UserData         any          `json:"userData"`
+	NodeApprovalMode ApprovalMode `json:"nodeApprovalMode"`
+	Tags             []string     `json:"tags"`
+	Fields           Fields       `json:"fields"`
 }
 
 type OrganizationDetailed struct {
@@ -36,7 +36,7 @@ type OrganizationDetailed struct {
 	UserData         any                            `json:"userData"`
 	NodeApprovalMode ApprovalMode                   `json:"nodeApprovalMode"`
 	Tags             []string                       `json:"tags"`
-	Fields           map[string]any                 `json:"fields"`
+	Fields           Fields                         `json:"fields"`
 	Locations        []Location                     `json:"locations,omitempty"`
 	Policies         []OrganizationPolicyItem       `json:"policies"`
 	Settings         map[string]OrganizationSetting `json:"settings,omitempty"` // 'trayicon', 'splashtop', 'teamviewer', 'backup' and 'psa'

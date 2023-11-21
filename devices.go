@@ -69,7 +69,7 @@ type Device struct {
 	LastUpdate     Time           `json:"lastUpdate"`
 	UserData       any            `json:"userData"`
 	Tags           []string       `json:"tags"`
-	Fields         map[string]any `json:"fields"`
+	Fields         Fields         `json:"fields"`
 	Maintenance    struct {
 		Status MaintenanceStatus `json:"status"`
 		Start  Time              `json:"start"`
@@ -94,27 +94,27 @@ type Device struct {
 }
 
 type Policy struct {
-	ID               int            `json:"id"`
-	ParentPolicyID   int            `json:"parentPolicyId"`
-	Name             string         `json:"name"`
-	Description      string         `json:"description"`
-	NodeClass        NodeClass      `json:"nodeClass"`
-	Updated          Time           `json:"updated"`
-	NodeClassDefault bool           `json:"nodeClassDefault"`
-	Tags             []string       `json:"tags"`
-	Fields           map[string]any `json:"fields"`
+	ID               int       `json:"id"`
+	ParentPolicyID   int       `json:"parentPolicyId"`
+	Name             string    `json:"name"`
+	Description      string    `json:"description"`
+	NodeClass        NodeClass `json:"nodeClass"`
+	Updated          Time      `json:"updated"`
+	NodeClassDefault bool      `json:"nodeClassDefault"`
+	Tags             []string  `json:"tags"`
+	Fields           Fields    `json:"fields"`
 }
 
 type DeviceRole struct {
-	ID          int            `json:"id"`
-	Name        string         `json:"name"`
-	Description string         `json:"description"`
-	NodeClass   NodeClass      `json:"nodeClass"`
-	Custom      bool           `json:"custom"`
-	ChassisType Chassis        `json:"chassisType"`
-	Created     Time           `json:"created"`
-	Tags        []string       `json:"tags"`
-	Fields      map[string]any `json:"fields"`
+	ID          int       `json:"id"`
+	Name        string    `json:"name"`
+	Description string    `json:"description"`
+	NodeClass   NodeClass `json:"nodeClass"`
+	Custom      bool      `json:"custom"`
+	ChassisType Chassis   `json:"chassisType"`
+	Created     Time      `json:"created"`
+	Tags        []string  `json:"tags"`
+	Fields      Fields    `json:"fields"`
 }
 
 type Chassis string

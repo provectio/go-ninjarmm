@@ -5,8 +5,10 @@ import (
 	"time"
 )
 
+// Better implementation of `double“ provided by NinjaAPI for time.Time.
 type Time time.Time
 
+// UnmarshalJSON implements the json.Unmarshaler interface for ninjarmm.Time.
 func (t *Time) UnmarshalJSON(b []byte) (err error) {
 	var double float64
 	if err = json.Unmarshal(b, &double); err != nil {
@@ -24,14 +26,17 @@ func (t *Time) UnmarshalJSON(b []byte) (err error) {
 	return
 }
 
+// MarshalJSON implements the json.Marshaler interface for ninjarmm.Time.
 func (j Time) MarshalJSON() ([]byte, error) {
 	return json.Marshal(time.Time(j))
 }
 
+// Format implements the fmt.Formatter interface for ninjarmm.Time.
 func (j Time) Format(s string) string {
 	return time.Time(j).Format(s)
 }
 
+// String implements the fmt.Stringer interface for ninjarmm.Time.
 func (j Time) String() string {
 	return time.Time(j).String()
 }

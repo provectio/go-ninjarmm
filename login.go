@@ -10,6 +10,14 @@ import (
 	"time"
 )
 
+// Login to the NinjaRMM API with valid `cliendID` and `clientSecret`.
+//
+// Usage:
+//
+//	err := Login("clientID", "clientSecret")
+//	if err != nil {
+//		panic(err)
+//	}
 func Login(options ...string) (err error) {
 
 	now := time.Now()
@@ -71,6 +79,10 @@ func Login(options ...string) (err error) {
 	return
 }
 
+// Response from the NinjaRMM API when logging in.
+//
+// It contains the access token and other information.
+// See https://eu.ninjarmm.com/apidocs-beta/authorization/overview for more information.
 type authResponse struct {
 	AccessToken string `json:"access_token"`
 	TokenType   string `json:"token_type"`

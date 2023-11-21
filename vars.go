@@ -22,7 +22,7 @@ var (
 	}
 )
 
-// request sends a request to the NinjaRMM API
+// Base request used by all other requests
 func request(method, path string, payload interface{}, response interface{}) (err error) {
 
 	// Check if we already have a valid token
@@ -47,8 +47,8 @@ func request(method, path string, payload interface{}, response interface{}) (er
 		return
 	}
 
-	req.Header.Add("Authorization", "Bearer "+auth.AccessToken)
-	req.Header.Add("Accept", "application/json")
+	req.Header.Set("Authorization", "Bearer "+auth.AccessToken)
+	req.Header.Set("Accept", "application/json")
 
 	res, err := client.Do(req)
 	if err != nil {
@@ -72,3 +72,6 @@ func request(method, path string, payload interface{}, response interface{}) (er
 
 	return
 }
+
+// Shortcuts for map[string]interface{}
+type Fields map[string]interface{}

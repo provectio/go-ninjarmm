@@ -1,19 +1,29 @@
 package ninjarmm
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+	"net/url"
+)
 
-func ListLocations() (locations []Location, err error) {
-	err = request(http.MethodGet, "locations", nil, &locations)
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getLocations
+func ListLocations(after, pageSize int) (locations []Location, err error) {
+	values := url.Values{
+		"after":    []string{fmt.Sprint(after)},
+		"pageSize": []string{fmt.Sprint(pageSize)},
+	}
+
+	err = request(http.MethodGet, "locations?"+values.Encode(), nil, &locations)
 	return
 }
 
 type Location struct {
-	ID             int            `json:"id"`
-	Name           string         `json:"name"`
-	Address        string         `json:"address"`
-	Description    string         `json:"description"`
-	UserData       any            `json:"userData"`
-	Tags           []string       `json:"tags"`
-	Fields         map[string]any `json:"fields"`
-	OrganizationID int            `json:"organizationId"` // only when list all locations
+	ID             int      `json:"id"`
+	Name           string   `json:"name"`
+	Address        string   `json:"address"`
+	Description    string   `json:"description"`
+	UserData       any      `json:"userData"`
+	Tags           []string `json:"tags"`
+	Fields         Fields   `json:"fields"`
+	OrganizationID int      `json:"organizationId,omitempty"` // only when list all locations
 }
