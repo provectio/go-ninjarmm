@@ -1,11 +1,26 @@
 package ninjarmm
 
 import (
+	"fmt"
 	"net/http"
+	"net/url"
 )
 
-func CreateOrganization(organization OrganizationDetailed) (createdOrganization OrganizationDetailed, err error) {
-	err = request(http.MethodPost, "organizations", organization, &createdOrganization)
+// Create an organization, optionally based on a template organization
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/createOrganization
+func CreateOrganization(newOrganization OrganizationDetailed, model_id int) (createdOrganization OrganizationDetailed, err error) {
+
+	path := "organizations"
+	if model_id != 0 {
+		values := url.Values{
+			"templateOrganizationId": {fmt.Sprint(model_id)},
+		}
+		path += "?" + values.Encode()
+	}
+
+	err = request(http.MethodPost, path, newOrganization, &createdOrganization)
+
 	return
 }
 

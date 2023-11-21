@@ -48,6 +48,7 @@ func request(method, path string, payload interface{}, response interface{}) (er
 	}
 
 	req.Header.Set("Authorization", "Bearer "+auth.AccessToken)
+	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json")
 
 	res, err := client.Do(req)
