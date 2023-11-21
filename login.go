@@ -6,15 +6,16 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
 
-// Login to the NinjaRMM API with valid `cliendID` and `clientSecret`.
+// Login to the NinjaRMM API with valid `cliendID`, `clientSecret` and `scope`.
 //
 // Usage:
 //
-//	err := Login("clientID", "clientSecret")
+//	err := Login("clientID", "clientSecret", "monitoring management control")
 //	if err != nil {
 //		panic(err)
 //	}
@@ -25,25 +26,27 @@ func Login(options ...string) (err error) {
 	// Check if we already have a valid token
 	if auth != nil && auth.expiresAt.After(now) {
 		return
-	} else if auth == nil && len(options) != 2 {
-		err = fmt.Errorf("error logging in, no client ID and secret provided")
+	} else if auth == nil && len(options) != 3 {
+		err = fmt.Errorf("error logging in, no client ID, secret or scope provided")
 		return
 	} else if auth != nil {
-		options = []string{auth.clientID, auth.clientSecret}
+		options = []string{auth.clientID, auth.clientSecret, auth.Scope}
 	}
 
-	clientID := options[0]
-	clientSecret := options[1]
+	values := url.Values{
+		"grant_type":    {"client_credentials"},
+		"client_id":     {options[0]},
+		"client_secret": {options[1]},
+		"scope":         {options[2]},
+	}
 
-	payload := fmt.Sprintf("grant_type=client_credentials&client_id=%s&client_secret=%s", clientID, clientSecret)
-
-	req, err := http.NewRequest(http.MethodPost, authUrl, strings.NewReader(payload))
+	req, err := http.NewRequest(http.MethodPost, authUrl, strings.NewReader(values.Encode()))
 	if err != nil {
 		err = fmt.Errorf("error creating request: %w", err)
 		return
 	}
 
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	res, err := client.Do(req)
 	if err != nil {
@@ -71,8 +74,8 @@ func Login(options ...string) (err error) {
 		err = errors.New("no valid access token found in response")
 	} else {
 		response.expiresAt = now.Add(time.Duration(response.ExpiresIn-60) * time.Second)
-		response.clientID = clientID
-		response.clientSecret = clientSecret
+		response.clientID = values["client_id"][0]
+		response.clientSecret = values["client_secret"][0]
 		auth = &response
 	}
 

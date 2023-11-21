@@ -32,10 +32,10 @@ import "github.com/provectio/go-ninjarmm"
 
 ## Login
 
-You need call this function only one time. After, for each request, the package automatically refresh the token when it's expired whit same `client-id` and `client-secret` fro mthe first call.
+You need call this function only one time. After, for each request, the package automatically refresh the token when it's expired whit same `client-id`, `client-secret` and `scope` from the first call.
 
 ```go
-err := ninjarmm.Login("<client-id>", "<client-secret>")
+err := ninjarmm.Login("<client-id>", "<client-secret>", "monitoring management control")
 if err != nil {
   panic(err)
 }
