@@ -13,6 +13,8 @@ import (
 
 // Login to the NinjaRMM API with valid `cliendID`, `clientSecret` and `scope`.
 //
+// See https://eu.ninjarmm.com/apidocs-beta/authorization/create-applications/machine-to-machine-apps to create your client ID and secret.
+//
 // Usage:
 //
 //	err := Login("clientID", "clientSecret", "monitoring management control")

@@ -6,6 +6,8 @@ import (
 	"net/url"
 )
 
+// List all devices with some filters
+//
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/articles/devices/device-filters for filter
 func ListDevices(filter string, detailed bool, after, pageSize int) (devices []Device, err error) {
 
@@ -28,6 +30,9 @@ func ListDevices(filter string, detailed bool, after, pageSize int) (devices []D
 	return
 }
 
+// Find devices by search string
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/search
 func FindDevices(search string, limit int) (devices []Device, err error) {
 
 	urlValues := url.Values{
@@ -39,11 +44,17 @@ func FindDevices(search string, limit int) (devices []Device, err error) {
 	return
 }
 
+// List all device roles
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getNodeRoles
 func ListDeviceRoles() (deviceRoles []DeviceRole, err error) {
 	err = request(http.MethodGet, "roles", nil, &deviceRoles)
 	return
 }
 
+// List all device policies
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getPolicies
 func ListDevicePolicies() (policies []Policy, err error) {
 	err = request(http.MethodGet, "policies", nil, &policies)
 	return
@@ -67,9 +78,9 @@ type Device struct {
 	Created        Time           `json:"created"`
 	LastContact    Time           `json:"lastContact"`
 	LastUpdate     Time           `json:"lastUpdate"`
-	UserData       any            `json:"userData"`
-	Tags           []string       `json:"tags"`
-	Fields         Fields         `json:"fields"`
+	UserData       CustomFields   `json:"userData"`
+	Tags           []string       `json:"tags"`   // seems not implemented yet
+	Fields         CustomFields   `json:"fields"` // seems not implemented yet
 	Maintenance    struct {
 		Status MaintenanceStatus `json:"status"`
 		Start  Time              `json:"start"`
@@ -94,27 +105,27 @@ type Device struct {
 }
 
 type Policy struct {
-	ID               int       `json:"id"`
-	ParentPolicyID   int       `json:"parentPolicyId"`
-	Name             string    `json:"name"`
-	Description      string    `json:"description"`
-	NodeClass        NodeClass `json:"nodeClass"`
-	Updated          Time      `json:"updated"`
-	NodeClassDefault bool      `json:"nodeClassDefault"`
-	Tags             []string  `json:"tags"`
-	Fields           Fields    `json:"fields"`
+	ID               int          `json:"id"`
+	ParentPolicyID   int          `json:"parentPolicyId"`
+	Name             string       `json:"name"`
+	Description      string       `json:"description"`
+	NodeClass        NodeClass    `json:"nodeClass"`
+	Updated          Time         `json:"updated"`
+	NodeClassDefault bool         `json:"nodeClassDefault"`
+	Tags             []string     `json:"tags"`
+	Fields           CustomFields `json:"fields"`
 }
 
 type DeviceRole struct {
-	ID          int       `json:"id"`
-	Name        string    `json:"name"`
-	Description string    `json:"description"`
-	NodeClass   NodeClass `json:"nodeClass"`
-	Custom      bool      `json:"custom"`
-	ChassisType Chassis   `json:"chassisType"`
-	Created     Time      `json:"created"`
-	Tags        []string  `json:"tags"`
-	Fields      Fields    `json:"fields"`
+	ID          int          `json:"id"`
+	Name        string       `json:"name"`
+	Description string       `json:"description"`
+	NodeClass   NodeClass    `json:"nodeClass"`
+	Custom      bool         `json:"custom"`
+	ChassisType Chassis      `json:"chassisType"`
+	Created     Time         `json:"created"`
+	Tags        []string     `json:"tags"`
+	Fields      CustomFields `json:"fields"`
 }
 
 type Chassis string

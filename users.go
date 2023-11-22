@@ -5,6 +5,9 @@ import (
 	"net/http"
 )
 
+// List all users, can be filtered by user type
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getUsers
 func ListUsers(userType UserType) (users []User, err error) {
 
 	if userType != UserTypeTechnician && userType != UserTypeEndUser && userType != "" {
@@ -14,6 +17,14 @@ func ListUsers(userType UserType) (users []User, err error) {
 
 	err = request(http.MethodGet, "users?userType="+string(userType), nil, &users)
 
+	return
+}
+
+// List all users from an organization
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getEndUsers
+func ListOrganizationUsers(organizationID int) (users []User, err error) {
+	err = request(http.MethodGet, fmt.Sprintf("organization/%d/end-users", organizationID), nil, &users)
 	return
 }
 
@@ -46,8 +57,8 @@ type User struct {
 	MFAConfigured    bool             `json:"mfaConfigured"`
 	UserType         UserType         `json:"userType"`         // 'TECHNICIAN' or 'END_USER'
 	InvitationStatus InvitationStatus `json:"invitationStatus"` // 'PENDING' or 'REGISTERED' or 'EXPIRED'
-	OrganizationID   int              `json:"organizationId"`
+	OrganizationID   int              `json:"organizationId"`   // For END_USER only
 	DeviceIDs        []int            `json:"deviceIds"`
 	Tags             []string         `json:"tags"`
-	Fields           Fields           `json:"fields"`
+	Fields           CustomFields     `json:"fields"`
 }

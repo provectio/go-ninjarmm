@@ -59,7 +59,7 @@ func request(method, path string, payload interface{}, response interface{}) (er
 
 	defer res.Body.Close()
 
-	if status := res.StatusCode; status != http.StatusOK {
+	if status := res.StatusCode; status > 299 {
 		body, _ := io.ReadAll(res.Body)
 		err = fmt.Errorf("error bad status code '%d' : %s", status, body)
 		return
@@ -76,4 +76,4 @@ func request(method, path string, payload interface{}, response interface{}) (er
 }
 
 // Shortcuts for map[string]interface{}
-type Fields map[string]interface{}
+type CustomFields map[string]interface{}
