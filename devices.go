@@ -42,9 +42,14 @@ func ListDevices(filter string, detailed bool, after, pageSize int) (devices []D
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/search
 func FindDevices(search string, limit int) (devices []Device, err error) {
 
-	urlValues := url.Values{
-		"q":     []string{search},
-		"limit": []string{fmt.Sprint(limit)},
+	urlValues := url.Values{}
+
+	if search != "" {
+		urlValues.Set("q", search)
+	}
+
+	if limit != 0 {
+		urlValues.Set("limit", fmt.Sprint(limit))
 	}
 
 	err = request(http.MethodGet, "devices/search?"+urlValues.Encode(), nil, &devices)
