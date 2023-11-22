@@ -65,6 +65,24 @@ func TestMain(t *testing.T) {
 		} else {
 			t.Logf("Found %d organizations", len(organizations))
 		}
+
+		t.Run("UpdateOrganization", func(t *testing.T) {
+			if len(organizations) < 1 {
+				t.Skip("Skipping test (no organizations found)")
+			}
+			oldDescription := organizations[0].Description
+			organizations[0].Description = "Testing organization update"
+			err := UpdateOrganization(organizations[0])
+			if err != nil {
+				t.Error(err)
+			} else {
+				t.Logf("Updated organization:\n%+v", organizations[0])
+
+				// Revert changes
+				organizations[0].Description = oldDescription
+				UpdateOrganization(organizations[0])
+			}
+		})
 	})
 }
 

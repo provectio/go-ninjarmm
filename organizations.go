@@ -21,6 +21,20 @@ func CreateOrganization(newOrganization OrganizationDetailed, model_id int) (cre
 	return
 }
 
+// Update an organization
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateOrganization
+func UpdateOrganization(organization Organization) (err error) {
+	if organization.ID == 0 {
+		err = fmt.Errorf("organization ID required")
+	} else {
+		id := organization.ID
+		organization.ID = 0
+		err = request(http.MethodPatch, fmt.Sprintf("organization/%d", id), organization, nil)
+	}
+	return
+}
+
 // Update a set of custom fields for an organization
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeAttributeValues_1
