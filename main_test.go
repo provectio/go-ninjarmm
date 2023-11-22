@@ -84,6 +84,15 @@ func TestMain(t *testing.T) {
 			}
 		})
 	})
+
+	t.Run("ListDevices", func(t *testing.T) {
+		devices, err := ListDevices("", false, 0, 0)
+		if err != nil {
+			t.Error(err)
+		} else {
+			t.Logf("Found %d devices", len(devices))
+		}
+	})
 }
 
 func TestActivityLogQueryValues(t *testing.T) {

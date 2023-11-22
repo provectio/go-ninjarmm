@@ -8,17 +8,24 @@ import (
 
 // List all devices with some filters
 //
-// See https://eu.ninjarmm.com/apidocs-beta/core-resources/articles/devices/device-filters for filter
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getDevices
+//
+// For filter see
+// https://eu.ninjarmm.com/apidocs-beta/core-resources/articles/devices/device-filters
 func ListDevices(filter string, detailed bool, after, pageSize int) (devices []Device, err error) {
 
-	if pageSize == 0 {
-		pageSize = 100
+	urlValues := url.Values{}
+
+	if filter != "" {
+		urlValues.Set("df", filter)
 	}
 
-	urlValues := url.Values{
-		"df":       []string{filter},
-		"after":    []string{fmt.Sprint(after)},
-		"pageSize": []string{fmt.Sprint(pageSize)},
+	if after != 0 {
+		urlValues.Set("after", fmt.Sprint(after))
+	}
+
+	if pageSize != 0 {
+		urlValues.Set("pageSize", fmt.Sprint(pageSize))
 	}
 
 	path := "devices"
