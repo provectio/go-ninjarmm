@@ -128,8 +128,29 @@ func TestTime(t *testing.T) {
 
 func envVars() (clientID, clientSecret string, err error) {
 	if _, err := os.Stat(".env"); os.IsNotExist(err) {
-		clientID = os.Getenv("NINJARMM_CLIENT_ID")
-		clientSecret = os.Getenv("NINJARMM_CLIENT_SECRET")
+		if _, err := os.Stat("env.json"); os.IsNotExist(err) {
+			clientID = os.Getenv("NINJARMM_CLIENT_ID")
+			clientSecret = os.Getenv("NINJARMM_CLIENT_SECRET")
+		} else {
+
+			type envJSON struct {
+				ClientID     string `json:"client_id"`
+				ClientSecret string `json:"client_secret"`
+			}
+
+			var env envJSON
+			data, err := os.ReadFile("env.json")
+			if err != nil {
+				return "", "", err
+			}
+			err = json.Unmarshal(data, &env)
+			if err != nil {
+				return "", "", err
+			}
+			clientID = env.ClientID
+			clientSecret = env.ClientSecret
+		}
+
 	} else {
 		data, err := os.ReadFile(".env")
 		if err != nil {
