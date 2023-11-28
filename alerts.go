@@ -51,20 +51,20 @@ func ListAlertsDevice(devideID int, lang string, tz string) (alerts []Alert, err
 }
 
 type Alert struct {
-	UID              string          `json:"uid"`              // Alert UID (activity series UID)
-	DeviceID         int             `json:"deviceId"`         // Device identifier
-	Message          string          `json:"message"`          // Alert message
-	CreateTime       Time            `json:"createTime"`       // Alert creation timestamp
-	UpdateTime       Time            `json:"updateTime"`       // Alert last updated
-	SourceType       AlertOrigin     `json:"sourceType"`       // Alert origin
-	SourceConfigUID  string          `json:"sourceConfigUid"`  // Source configuration/policy element reference
-	SourceName       string          `json:"sourceName"`       // Source configuration/policy element name
-	Subject          string          `json:"subject"`          // Alert subject
-	UserID           int             `json:"userId"`           // User identifier
-	PSATicketID      int             `json:"psaTicketId"`      // related PSA ticket identifier
-	TicketTemplateID int             `json:"ticketTemplateId"` // related ticket template identifier
-	Data             any             `json:"data"`             // Alert data
-	Device           `json:"device"` // ☣️ seems not implemented
+	UID              string      `json:"uid"`              // Alert UID (activity series UID)
+	DeviceID         int         `json:"deviceId"`         // Device identifier
+	Message          string      `json:"message"`          // Alert message
+	CreateTime       Time        `json:"createTime"`       // Alert creation timestamp
+	UpdateTime       Time        `json:"updateTime"`       // Alert last updated
+	SourceType       AlertOrigin `json:"sourceType"`       // Alert origin
+	SourceConfigUID  string      `json:"sourceConfigUid"`  // Source configuration/policy element reference
+	SourceName       string      `json:"sourceName"`       // Source configuration/policy element name
+	Subject          string      `json:"subject"`          // Alert subject
+	UserID           int         `json:"userId"`           // User identifier
+	PSATicketID      int         `json:"psaTicketId"`      // related PSA ticket identifier
+	TicketTemplateID int         `json:"ticketTemplateId"` // related ticket template identifier
+	Data             any         `json:"data"`             // Alert data
+	// Device           `json:"device"` // ☣️ seems not implemented
 }
 
 type AlertOrigin string

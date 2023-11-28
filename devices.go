@@ -6,6 +6,14 @@ import (
 	"net/url"
 )
 
+// Get device by ID
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getDevice
+func GetDevice(deviceID int) (device Device, err error) {
+	err = request(http.MethodGet, fmt.Sprintf("device/%d", deviceID), nil, &device)
+	return
+}
+
 // List all devices with some filters
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getDevices
