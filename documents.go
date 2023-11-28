@@ -9,7 +9,7 @@ import (
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getOrganizationDocuments
 
-func getOrganizationDocuments(organizationID int) (documents []Document, err error) {
+func GetOrganizationDocuments(organizationID int) (documents []Document, err error) {
 	err = request(http.MethodGet, fmt.Sprintf("organization/%d/documents", organizationID), nil, &documents)
 	return
 }
@@ -18,7 +18,7 @@ func getOrganizationDocuments(organizationID int) (documents []Document, err err
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateOrganizationDocument
 
-func updateOrganizationDocument(organizationID int, document Document) (err error) {
+func UpdateOrganizationDocument(organizationID int, document Document) (err error) {
 	err = request(http.MethodPost, fmt.Sprintf("organization/%d/document/%d", organizationID, document.ClientDocumentID), nil, nil)
 	return
 }
