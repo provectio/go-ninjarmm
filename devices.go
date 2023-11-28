@@ -72,6 +72,24 @@ func ListDevicePolicies() (policies []Policy, err error) {
 	return
 }
 
+// Return list of device custom fields
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getNodeCustomFields
+
+func GetDeviceCustomFields(deviceID int) (customFields CustomFields, err error) {
+	err = request(http.MethodGet, fmt.Sprintf("device/%d/custom-fields", deviceID), nil, &customFields)
+	return
+}
+
+// Update device custom field values
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeAttributeValues
+
+func SetDeviceCustomFields(deviceID int, customFields CustomFields) (err error) {
+	err = request(http.MethodPatch, fmt.Sprintf("device/%d/custom-fields", deviceID), customFields, nil)
+	return
+}
+
 type Device struct {
 	ID             int            `json:"id"`
 	ParentDeviceID int            `json:"parentDeviceId"`
