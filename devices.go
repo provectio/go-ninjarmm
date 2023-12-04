@@ -14,6 +14,14 @@ func GetDevice(deviceID int) (device Device, err error) {
 	return
 }
 
+// Returns list of devices for organization
+//
+// See https://app.ninjarmm.com/apidocs-beta/core-resources/operations/getOrganizationDevices
+func ListOrganizationDevices(organizationID int) (devices []Device, err error) {
+	err = request(http.MethodGet, fmt.Sprintf("organization/%d/devices", organizationID), nil, &devices)
+	return
+}
+
 // List all devices with some filters
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getDevices
