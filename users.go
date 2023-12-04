@@ -20,7 +20,7 @@ func ListUsers(userType UserType) (users []User, err error) {
 	return
 }
 
-// List all users from an organization
+// Returns list of end-users for organization
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getEndUsers
 func ListOrganizationUsers(organizationID int) (users []User, err error) {
