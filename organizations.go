@@ -6,6 +6,14 @@ import (
 	"net/url"
 )
 
+// Returns organization details (policy mappings, locations)
+//
+// See https://app.ninjarmm.com/apidocs-beta/core-resources/operations/getOrganization
+func GetOrganization(organizationID int) (organization OrganizationDetailed, err error) {
+	err = request(http.MethodGet, fmt.Sprintf("organization/%d", organizationID), nil, &organization)
+	return
+}
+
 // Create an organization, optionally based on a template organization
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/createOrganization
