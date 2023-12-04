@@ -92,6 +92,20 @@ func TestMain(t *testing.T) {
 				UpdateOrganization(organizations[0])
 			}
 		})
+
+		t.Run("GetOrganizationLocations", func(t *testing.T) {
+			if len(organizations) < 1 {
+				t.Skip("Skipping test (no organizations found)")
+			}
+			locations, err := ListOrganizationLocations(organizations[0].ID)
+			if err != nil {
+				t.Error(err)
+			} else {
+				t.Logf("Found %d locations", len(locations))
+				t.Logf("%+v", locations)
+			}
+		})
+
 	})
 
 	t.Run("ListDevices", func(t *testing.T) {
