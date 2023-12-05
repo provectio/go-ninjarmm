@@ -34,6 +34,8 @@ func (c CustomFields) StringField(key string) string {
 	switch i := c[key].(type) {
 	case string:
 		return i
+	case nil:
+		return ""
 	default:
 		return fmt.Sprint(i)
 	}
