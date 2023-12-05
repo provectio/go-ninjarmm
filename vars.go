@@ -74,6 +74,3 @@ func request(method, path string, payload interface{}, response interface{}) (er
 
 	return
 }
-
-// Shortcuts for map[string]interface{}
-type CustomFields map[string]interface{}
