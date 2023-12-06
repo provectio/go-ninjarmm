@@ -65,12 +65,12 @@ func SetLocationCustomFields(organizationID, locationID int, customFields Custom
 }
 
 type Location struct {
-	ID             int          `json:"id"`
-	Name           string       `json:"name"`
-	Address        string       `json:"address"`
-	Description    string       `json:"description"`
-	UserData       CustomFields `json:"userData"`
-	Tags           []string     `json:"tags"`                     // seems not implemented yet
-	Fields         CustomFields `json:"fields"`                   // seems not implemented yet
+	ID             int          `json:"id,omitempty"`
+	Name           string       `json:"name,omitempty"`
+	Address        string       `json:"address,omitempty"`
+	Description    string       `json:"description,omitempty"`
+	UserData       CustomFields `json:"userData,omitempty"`
+	Tags           []string     `json:"tags,omitempty"`           // seems not implemented yet
+	Fields         CustomFields `json:"fields,omitempty"`         // seems not implemented yet
 	OrganizationID int          `json:"organizationId,omitempty"` // only when list all locations
 }

@@ -28,7 +28,7 @@ type Document struct {
 	ClientDocumentName        string          `json:"clientDocumentName"`
 	ClientDocumentDescription string          `json:"clientDocumentDescription"`
 	ClientDocumentUpdateTime  int             `json:"clientDocumentUpdateTime"`
-	AttributeValues           []DocumentValue `json:"attributeValues"`
+	AttributeValues           []DocumentValue `json:"attributeValues,omitempty"`
 }
 
 type DocumentValue struct {

@@ -77,24 +77,24 @@ func ListOrganizationsDetailed() (organizations []OrganizationDetailed, err erro
 
 type Organization struct {
 	ID               int          `json:"id,omitempty"`
-	Name             string       `json:"name"`
-	Description      string       `json:"description"`
-	UserData         CustomFields `json:"userData"`
-	NodeApprovalMode ApprovalMode `json:"nodeApprovalMode"`
-	Tags             []string     `json:"tags"`   // seems not implemented yet
-	Fields           CustomFields `json:"fields"` // seems not implemented yet
+	Name             string       `json:"name,omitempty"`
+	Description      string       `json:"description,omitempty"`
+	UserData         CustomFields `json:"userData,omitempty"`
+	NodeApprovalMode ApprovalMode `json:"nodeApprovalMode,omitempty"`
+	Tags             []string     `json:"tags,omitempty"`   // seems not implemented yet
+	Fields           CustomFields `json:"fields,omitempty"` // seems not implemented yet
 }
 
 type OrganizationDetailed struct {
 	ID               int                            `json:"id,omitempty"`
-	Name             string                         `json:"name"`
-	Description      string                         `json:"description"`
-	UserData         CustomFields                   `json:"userData"`
-	NodeApprovalMode ApprovalMode                   `json:"nodeApprovalMode"`
-	Tags             []string                       `json:"tags"`   // seems not implemented yet
-	Fields           CustomFields                   `json:"fields"` // seems not implemented yet
+	Name             string                         `json:"name,omitempty"`
+	Description      string                         `json:"description,omitempty"`
+	UserData         CustomFields                   `json:"userData,omitempty"`
+	NodeApprovalMode ApprovalMode                   `json:"nodeApprovalMode,omitempty"`
+	Tags             []string                       `json:"tags,omitempty"`   // seems not implemented yet
+	Fields           CustomFields                   `json:"fields,omitempty"` // seems not implemented yet
 	Locations        []Location                     `json:"locations,omitempty"`
-	Policies         []OrganizationPolicyItem       `json:"policies"`
+	Policies         []OrganizationPolicyItem       `json:"policies,omitempty"`
 	Settings         map[string]OrganizationSetting `json:"settings,omitempty"` // 'trayicon', 'splashtop', 'teamviewer', 'backup' and 'psa'
 }
 
