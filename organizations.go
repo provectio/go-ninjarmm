@@ -69,6 +69,16 @@ func (organization *Organization) GetCustomFields() (err error) {
 	return
 }
 
+// Populate custom fields for a detailed organization
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getNodeCustomField_2
+func (organization *OrganizationDetailed) GetCustomFields() (err error) {
+	var customFields CustomFields
+	err = request(http.MethodGet, fmt.Sprintf("organization/%d/custom-fields", organization.ID), nil, &customFields)
+	organization.Fields = customFields
+	return
+}
+
 // List all organizations
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/getOrganizations
