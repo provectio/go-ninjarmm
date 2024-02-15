@@ -48,11 +48,21 @@ func ListLocations(after, pageSize int) (locations []Location, err error) {
 	return
 }
 
-// Returns list of location custom fields
+// Returns location custom fields
 //
 // See https://app.ninjarmm.com/apidocs-beta/core-resources/operations/getNodeCustomFields_1
 func GetLocationCustomFields(organizationID, locationID int) (customFields CustomFields, err error) {
 	err = request(http.MethodGet, fmt.Sprintf("organization/%d/location/%d/custom-fields", organizationID, locationID), nil, &customFields)
+	return
+}
+
+// Populate location custom fields
+//
+// See https://app.ninjarmm.com/apidocs-beta/core-resources/operations/getNodeCustomFields_1
+func (location *Location) GetCustomFields() (err error) {
+	var customFields CustomFields
+	err = request(http.MethodGet, fmt.Sprintf("organization/%d/location/%d/custom-fields", location.OrganizationID, location.ID), nil, &customFields)
+	location.Fields = customFields
 	return
 }
 

@@ -11,22 +11,31 @@ type CustomFields map[string]interface{}
 // Set sets a custom field.
 // Don't forget to call make(CustomFields) before using this function.
 //
+// You can reset the field by setting his value to nil.
+//
 // Example:
 //
-//	customFields := make(CustomFields)
+//	customFields := make(ninjarmm.CustomFields)
 //	customFields.Set("myField", "myValue")
 func (c CustomFields) Set(key string, value interface{}) {
 	c[key] = value
 }
 
 // Get returns the interface{} value from the custom field.
+// Same as InterfaceField.
 func (c CustomFields) Get(key string) interface{} {
 	return c[key]
 }
 
 // InterfaceField returns the interface{} value from the custom field.
+// Same as Get.
 func (c CustomFields) InterfaceField(key string) interface{} {
 	return c[key]
+}
+
+// Delete deletes a custom field.
+func (c CustomFields) Delete(key string) {
+	delete(c, key)
 }
 
 // StringField returns a string value from the custom field.
