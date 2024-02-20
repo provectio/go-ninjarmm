@@ -1,6 +1,7 @@
 **Table of contents:**
 
 - [Description](#description)
+  - [Version](#version)
   - [Installation](#installation)
 - [Examples](#examples)
   - [Login](#login)
@@ -15,6 +16,10 @@ This is a Go client for the NinjaRMM API for EU region.
 Login is required the first time you launch the client and information is stored internally in the package. The package automatically refresh the token when it's expired.
 
 To get a valid `Client ID` and `Client Secret` you can read the [Ninja Documentation API](https://eu.ninjarmm.com/apidocs-beta/authorization/create-applications/machine-to-machine-apps).
+
+## Version
+
+NinjaAPI `v2.0.9-draft`
 
 ## Installation
 
