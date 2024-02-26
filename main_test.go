@@ -36,15 +36,6 @@ func TestMain(t *testing.T) {
 		}
 	})
 
-	alerts, err := ListAlerts("", "", "", "")
-	if err != nil {
-		t.Fatal(err)
-	} else if len(alerts) == 0 {
-		t.Log("No alerts found!")
-	} else {
-		t.Logf("Alerts:\n%+v", alerts[0])
-	}
-
 	t.Run("CreateOrganization", func(t *testing.T) {
 		// ⚠️ Use with Caution ⚠️
 		// Can't delete organizations with API
