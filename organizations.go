@@ -95,6 +95,30 @@ func ListOrganizationsDetailed() (organizations []OrganizationDetailed, err erro
 	return
 }
 
+// Change organization policy mappings
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeRolePolicyAssignmentForOrganization
+func (organization *OrganizationDetailed) UpdatePolicies(policies []OrganizationPolicyItem) (affectedDevicesIDs []int, err error) {
+	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organization.ID), policies, affectedDevicesIDs)
+	return
+}
+
+// Change organization policy mappings
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeRolePolicyAssignmentForOrganization
+func (organization *Organization) UpdatePolicies(policies []OrganizationPolicyItem) (affectedDevicesIDs []int, err error) {
+	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organization.ID), policies, affectedDevicesIDs)
+	return
+}
+
+// Change organization policy mappings
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeRolePolicyAssignmentForOrganization
+func UpdateOrganizationPolicies(organizationID int, policies []OrganizationPolicyItem) (affectedDevicesIDs []int, err error) {
+	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organizationID), policies, affectedDevicesIDs)
+	return
+}
+
 type Organization struct {
 	ID               int          `json:"id,omitempty"`
 	Name             string       `json:"name,omitempty"`
