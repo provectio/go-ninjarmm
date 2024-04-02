@@ -99,7 +99,7 @@ func ListOrganizationsDetailed() (organizations []OrganizationDetailed, err erro
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeRolePolicyAssignmentForOrganization
 func (organization *OrganizationDetailed) UpdatePolicies(policies []OrganizationPolicyItem) (affectedDevicesIDs []int, err error) {
-	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organization.ID), policies, affectedDevicesIDs)
+	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organization.ID), policies, &affectedDevicesIDs)
 	return
 }
 
@@ -107,7 +107,7 @@ func (organization *OrganizationDetailed) UpdatePolicies(policies []Organization
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeRolePolicyAssignmentForOrganization
 func (organization *Organization) UpdatePolicies(policies []OrganizationPolicyItem) (affectedDevicesIDs []int, err error) {
-	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organization.ID), policies, affectedDevicesIDs)
+	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organization.ID), policies, &affectedDevicesIDs)
 	return
 }
 
@@ -115,7 +115,7 @@ func (organization *Organization) UpdatePolicies(policies []OrganizationPolicyIt
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeRolePolicyAssignmentForOrganization
 func UpdateOrganizationPolicies(organizationID int, policies []OrganizationPolicyItem) (affectedDevicesIDs []int, err error) {
-	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organizationID), policies, affectedDevicesIDs)
+	err = request(http.MethodPut, fmt.Sprintf("organization/%d/policies", organizationID), policies, &affectedDevicesIDs)
 	return
 }
 
