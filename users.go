@@ -33,6 +33,7 @@ type UserType string
 const (
 	UserTypeTechnician UserType = "TECHNICIAN"
 	UserTypeEndUser    UserType = "END_USER"
+	UserTypeContact    UserType = "CONTACT"
 )
 
 type InvitationStatus string
