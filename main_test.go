@@ -20,7 +20,7 @@ import (
 
 // ⚠️ Use with Caution ⚠️
 // Can't delete organizations with API
-const TestOrganizationCreation bool = false
+const testOrganizationCreation bool = false
 
 func TestMain(t *testing.T) {
 	// Getting environment variables
@@ -39,7 +39,7 @@ func TestMain(t *testing.T) {
 	t.Run("CreateOrganization", func(t *testing.T) {
 		// ⚠️ Use with Caution ⚠️
 		// Can't delete organizations with API
-		if !TestOrganizationCreation {
+		if !testOrganizationCreation {
 			t.Skip("Skipping organization creation test")
 			return
 		}
