@@ -43,6 +43,13 @@ func UpdateOrganization(organization Organization) (err error) {
 	return
 }
 
+// Update an organization
+//
+// See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateOrganization
+func (organization Organization) Update() (err error) {
+	return UpdateOrganization(organization)
+}
+
 // Update a set of custom fields for an organization
 //
 // See https://eu.ninjarmm.com/apidocs-beta/core-resources/operations/updateNodeAttributeValues_1
