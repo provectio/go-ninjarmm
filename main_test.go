@@ -1,7 +1,9 @@
 /*
-Create '.env' file with the following content:
-NINJARMM_CLIENT_ID=x
-NINJARMM_CLIENT_SECRET=x
+Create 'env.json' file with the following content:
+{
+  "client_id": "x",
+  "client_secret": "x"
+}
 
 Replace 'x' with your own values.
 
