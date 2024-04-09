@@ -313,14 +313,14 @@ type BoardTicket struct {
 	Device             string                        `json:"device"`
 	ID                 int                           `json:"id"`
 	Organization       string                        `json:"organization"`
-	Priority           string                        `json:"priority"`
-	Severity           string                        `json:"severity"`
 	Status             BoardTicketStatus             `json:"status"`
 	Summary            string                        `json:"summary"`
 	Tags               []string                      `json:"tags"`
 	TicketForm         string                        `json:"ticketForm"`
 	TotalTimeTracked   int                           `json:"totalTimeTracked"`
 	TriggeredCondition BoardTicketTriggeredCondition `json:"triggeredCondition"`
+	Priority           `json:"priority"`
+	Severity           `json:"severity"`
 }
 
 type BoardMetadata struct {
