@@ -63,6 +63,31 @@ func QueryOperatingSystems(filter string, pageSize int) (report OperatingSystemR
 	return
 }
 
+func QueryProcessorReport(filter string, pageSize int) (report ProcessorReport, err error) {
+	urlValues := url.Values{}
+
+	if filter != "" {
+		urlValues.Set("df", filter)
+	}
+
+	if pageSize != 0 {
+		urlValues.Set("pageSize", fmt.Sprint(pageSize))
+	}
+
+	err = request(http.MethodGet, "queries/processor-report?"+urlValues.Encode(), nil, &report)
+	return
+}
+
+type ProcessorReport struct {
+	Cursor  ReportCursor    `json:"cursor"`
+	Results []ProcessorInfo `json:"results"`
+}
+
+type ProcessorInfo struct {
+	Architecture  string `json:"architecture"`
+	MaxClockSpeed int    `json:"maxClockSpeed"`
+}
+
 type OperatingSystemReport struct {
 	Cursor  ReportCursor      `json:"cursor"`
 	Results []OperatingSystem `json:"results"`
