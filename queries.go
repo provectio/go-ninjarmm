@@ -78,6 +78,21 @@ func QueryProcessorReport(filter string, pageSize int) (report ProcessorReport, 
 	return
 }
 
+func QueryDiskVolumesReport(filter string, pageSize int) (report DiskVolumesReport, err error) {
+	urlValues := url.Values{}
+
+	if filter != "" {
+		urlValues.Set("df", filter)
+	}
+
+	if pageSize != 0 {
+		urlValues.Set("pageSize", fmt.Sprint(pageSize))
+	}
+
+	err = request(http.MethodGet, "queries/volumes?"+urlValues.Encode(), nil, &report)
+	return
+}
+
 type ProcessorReport struct {
 	Cursor  ReportCursor    `json:"cursor"`
 	Results []ProcessorInfo `json:"results"`
@@ -115,4 +130,25 @@ type ReportCursor struct {
 	Offset  int    `json:"offset"`
 	Count   int    `json:"count"`
 	Expires Time   `json:"expires"`
+}
+
+type DiskVolumesReport struct {
+	Cursor  ReportCursor  `json:"cursor"`
+	Results []DiskVolumes `json:"results"`
+}
+
+type DiskVolumes struct {
+	Manufacturer            string `json:"manufacturer"`
+	Name                    string `json:"name"`
+	Architecture            string `json:"architecture"`
+	LastBootTime            int    `json:"lastBootTime"`
+	BuildNumber             string `json:"buildNumber"`
+	ReleaseId               string `json:"releaseId"`
+	ServicePackMajorVersion int    `json:"servicePackMajorVersion"`
+	ServicePackMinorVersion int    `json:"servicePackMinorVersion"`
+	Locale                  string `json:"locale"`
+	Language                string `json:"language"`
+	NeedsReboot             bool   `json:"needsReboot"`
+	DeviceId                int    `json:"deviceId"`
+	Timestamp               int    `json:"timestamp"`
 }
