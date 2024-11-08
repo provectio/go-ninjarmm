@@ -138,17 +138,23 @@ type DiskVolumesReport struct {
 }
 
 type DiskVolumes struct {
-	Manufacturer            string `json:"manufacturer"`
-	Name                    string `json:"name"`
-	Architecture            string `json:"architecture"`
-	LastBootTime            int    `json:"lastBootTime"`
-	BuildNumber             string `json:"buildNumber"`
-	ReleaseId               string `json:"releaseId"`
-	ServicePackMajorVersion int    `json:"servicePackMajorVersion"`
-	ServicePackMinorVersion int    `json:"servicePackMinorVersion"`
-	Locale                  string `json:"locale"`
-	Language                string `json:"language"`
-	NeedsReboot             bool   `json:"needsReboot"`
-	DeviceId                int    `json:"deviceId"`
-	Timestamp               int    `json:"timestamp"`
+	Name            string `json:"name"`
+	DriveLetter     string `json:"driveLetter"`
+	Label           string `json:"label"`
+	DeviceType      string `json:"deviceType"`
+	FileSystem      string `json:"fileSystem"`
+	AutoMount       bool   `json:"autoMount"`
+	Compressed      bool   `json:"compressed"`
+	Capacity        int    `json:"capacity"`
+	FreeSpace       int    `json:"freeSpace"`
+	SerialNumber    string `json:"serialNumber"`
+	BitLockerStatus struct {
+		ConversionStatus         string `json:"conversionStatus"`
+		EncryptionMethod         string `json:"encryptionMethod"`
+		ProtectionStatus         string `json:"protectionStatus"`
+		LockStatus               string `json:"lockStatus"`
+		InitializedForProtection bool   `json:"initializedForProtection"`
+	} `json:"bitLockerStatus"`
+	DeviceId  int `json:"deviceId"`
+	Timestamp int `json:"timestamp"`
 }
