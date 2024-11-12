@@ -104,7 +104,7 @@ func SoftwareInventory(filter string, pageSize int) (report SoftwareInventoryRep
 		urlValues.Set("pageSize", fmt.Sprint(pageSize))
 	}
 
-	err = request(http.MethodGet, "queries/volumes?"+urlValues.Encode(), nil, &report)
+	err = request(http.MethodGet, "queries/software?"+urlValues.Encode(), nil, &report)
 	return
 }
 
