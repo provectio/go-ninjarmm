@@ -93,6 +93,21 @@ func QueryDiskVolumesReport(filter string, pageSize int) (report DiskVolumesRepo
 	return
 }
 
+func SoftwareInventory(filter string, pageSize int) (report SoftwareInventoryReport, err error) {
+	urlValues := url.Values{}
+
+	if filter != "" {
+		urlValues.Set("df", filter)
+	}
+
+	if pageSize != 0 {
+		urlValues.Set("pageSize", fmt.Sprint(pageSize))
+	}
+
+	err = request(http.MethodGet, "queries/volumes?"+urlValues.Encode(), nil, &report)
+	return
+}
+
 type ProcessorReport struct {
 	Cursor  ReportCursor    `json:"cursor"`
 	Results []ProcessorInfo `json:"results"`
@@ -157,4 +172,21 @@ type DiskVolumes struct {
 	} `json:"bitLockerStatus"`
 	DeviceId  int `json:"deviceId"`
 	Timestamp int `json:"timestamp"`
+}
+
+type SoftwareInventoryReport struct {
+	Cursor  ReportCursor `json:"cursor"`
+	Results []Software   `json:"results"`
+}
+
+type Software struct {
+	InstallDate string `json:"installDate"`
+	Location    string `json:"location"`
+	Name        string `json:"name"`
+	Publisher   string `json:"publisher"`
+	Size        int    `json:"size"`
+	Version     string `json:"version"`
+	ProductCode string `json:"productCode"`
+	DeviceId    int    `json:"deviceId"`
+	Timestamp   int    `json:"timestamp"`
 }
