@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"time"
 )
 
 // Query computer systems device informations
@@ -181,13 +180,11 @@ type SoftwareInventoryReport struct {
 }
 
 type Software struct {
-	InstallDate time.Time `json:"installDate"`
-	Location    string    `json:"location"`
-	Name        string    `json:"name"`
-	Publisher   string    `json:"publisher"`
-	Size        int       `json:"size"`
-	Version     string    `json:"version"`
-	ProductCode string    `json:"productCode"`
-	DeviceId    int       `json:"deviceId"`
-	Timestamp   time.Time `json:"timestamp"`
+	Location    string `json:"location"`
+	Name        string `json:"name"`
+	Publisher   string `json:"publisher"`
+	Size        int    `json:"size"`
+	Version     string `json:"version"`
+	ProductCode string `json:"productCode"`
+	DeviceId    int    `json:"deviceId"`
 }
