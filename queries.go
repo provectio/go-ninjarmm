@@ -181,7 +181,7 @@ type SoftwareInventoryReport struct {
 }
 
 type Software struct {
-	InstallDate string    `json:"installDate"`
+	InstallDate time.Time `json:"installDate"`
 	Location    string    `json:"location"`
 	Name        string    `json:"name"`
 	Publisher   string    `json:"publisher"`
